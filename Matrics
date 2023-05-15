@@ -1,0 +1,168 @@
+#include <iostream>
+using namespace std;
+
+// Function to print a matrix
+void printMatrix(int matrix[][3], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    // Declare and initialize two matrices to zero
+    int matrix1[3][3] = {0};
+    int matrix2[3][3] = {0};
+
+    while (true) {
+        // Display the main menu
+        cout << "Matrix Calculator" << endl;
+        cout << "-----------------" << endl;
+        cout << "1. Fill Matrices" << endl;
+        cout << "2. Operate on Matrices" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+            case 1: { // Fill matrices
+                cout << "Which matrix do you want to fill? (1/2): ";
+                int matrixChoice;
+                cin >> matrixChoice;
+
+                if (matrixChoice == 1) {
+                    cout << "Enter elements for matrix 1 (3x3):" << endl;
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            cin >> matrix1[i][j];
+                        }
+                    }
+                    cout << "Matrix 1:" << endl;
+                    printMatrix(matrix1, 3, 3);
+                } else if (matrixChoice == 2) {
+                    cout << "Enter elements for matrix 2 (3x3):" << endl;
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            cin >> matrix2[i][j];
+                        }
+                    }
+                    cout << "Matrix 2:" << endl;
+                    printMatrix(matrix2, 3, 3);
+                } else {
+                    cout << "Invalid matrix choice" << endl;
+                }
+
+                break;
+            }
+            case 2: { // Operate on matrices
+                cout << "Select a matrix operation:" << endl;
+                cout << "1. Transpose" << endl;
+                cout << "2. Multiplication of the two matrices" << endl;
+                cout << "3. Addition" << endl;
+                cout << "4. Print Matrix" << endl;
+                cout << "Enter your choice: ";
+
+                int operation;
+                cin >> operation;
+
+                switch (operation) {
+                    case 1: { // Transpose
+                        cout << "Which matrix do you want to transpose? (1/2): ";
+                        int matrixChoice;
+                        cin >> matrixChoice;
+
+                        if (matrixChoice == 1) {
+                            int transpose[3][3];
+                            for (int i = 0; i < 3; i++) {
+                                for (int j = 0; j < 3; j++) {
+                                    transpose[j][i] = matrix1[i][j];
+                                }
+                            }
+                            cout << "Transpose of matrix 1:" << endl;
+                            printMatrix(transpose, 3, 3);
+                        } else if (matrixChoice == 2) {
+                            int transpose[3][3];
+                            for (int i = 0; i < 3; i++) {
+                                for (int j = 0; j < 3; j++) {
+                                    transpose[j][i] = matrix2[i][j];
+                                }
+                            }
+                            cout << "Transpose of matrix 2:" << endl;
+                            printMatrix(transpose, 3, 3);
+                        } else {
+                            cout << "Invalid matrix choice" << endl;
+                        }
+
+                        break;
+                    }
+                    case 2: { // Multiplication
+                        int multiply[3][3] = {0};
+
+                        for (int i = 0; i < 3; i++) {
+                            for (int j = 0; j < 3; j++) {
+                                for (int k = 0; k < 3; k++) {
+                                    multiply[i][j] += matrix1[i][k] * matrix2[k][j];
+                                }
+                            }
+                        }
+
+                        cout << "Multiplication of matrix 1 and matrix 2:" << endl;
+                        printMatrix(multiply, 3, 3);
+
+                        break;
+                    }
+                    case 3: { // Addition
+                        int sum[3][3];
+
+                        for (int i = 0; i < 3; i++) {
+                            for (int j = 0; j < 3; j++) {
+                                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+                            }
+                        }
+
+                        cout << "Addition of matrix 1 and matrix 2:" << endl;
+                        printMatrix(sum, 3, 3);
+
+                        break;
+                    }
+                    case 4: { // Print matrix
+                        cout << "Which matrix do you want to print? (1/2): ";
+                        int matrixChoice;
+                        cin >> matrixChoice;
+
+                        if (matrixChoice == 1) {
+                            cout << "Matrix 1:" << endl;
+                            printMatrix(matrix1, 3, 3);
+                        } else if (matrixChoice == 2) {
+                            cout << "Matrix 2:" << endl;
+                            printMatrix(matrix2, 3, 3);
+                        } else {
+                            cout << "Invalid matrix choice" << endl;
+                        }
+
+                        break;
+                    }
+                    default: {
+                        cout << "Invalid operation choice" << endl;
+                        break;
+                    }
+                }
+
+                break;
+            }
+            case 3: { // Exit
+                return 0;
+            }
+            default: {
+                cout << "Invalid choice" << endl;
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
